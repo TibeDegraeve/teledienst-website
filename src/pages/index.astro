@@ -1,16 +1,87 @@
 ---
+import Layout from '../layouts/Layout.astro';
+import { createClient } from '@sanity/client';
+
+const client = createClient({
+  projectId: import.meta.env.PUBLIC_SANITY_PROJECT_ID,
+  dataset: import.meta.env.PUBLIC_SANITY_DATASET,
+  useCdn: false, 
+  apiVersion: '2024-01-01', 
+});
+
+const berichten = await client.fetch(`*[_type == "nieuws"] | order(datum desc)[0...3] {
+_id,
+  titel,
+  datum,
+  inhoud,
+  "imageUrl": afbeelding.asset->url
+}`);
 ---
 
-<html lang="en">
-	<head>
-		<meta charset="utf-8" />
-		<link rel="icon" type="image/svg+xml" href="/favicon.svg" />
-		<link rel="icon" href="/favicon.ico" />
-		<meta name="viewport" content="width=device-width" />
-		<meta name="generator" content={Astro.generator} />
-		<title>Astro</title>
-	</head>
-	<body>
-		<h1>Astro</h1>
-	</body>
-</html>
+<Layout>
+  <!-- Welkomstblok (Hero) in de paarse huisstijl -->
+  <section class="bg-purple-900 text-white rounded-xl p-10 mb-10 text-center shadow-md">
+    <h1 class="text-4xl md:text-5xl font-extrabold mb-4 tracking-tight">
+      Welkom bij <span class="text-lime-400">tele</span>dienst
+    </h1>
+    <p class="text-lg md:text-xl max-w-2xl mx-auto text-purple-100 leading-relaxed">
+      Een hart voor mensen. Wij bieden ondersteuning, een luisterend oor en praktische hulp zoals onze televestiaire.
+    </p>
+  </section>
+
+  <!-- Korte infoblokken -->
+  <section class="grid md:grid-cols-2 gap-6 mb-12">
+    <div class="bg-white p-6 rounded-lg border-t-4 border-lime-500 shadow-sm">
+      <h2 class="text-2xl font-bold text-gray-900 mb-2">Wat doen we?</h2>
+      <p class="text-gray-700">
+        VZW Teledienst zet zich in voor mensen met beperkte middelen. Via onze verschillende initiatieven proberen we armoede aan te pakken en mensen terug in hun kracht te zetten.
+      </p>
+    </div>
+    
+    <div class="bg-white p-6 rounded-lg border-t-4 border-purple-800 shadow-sm">
+      <h2 class="text-2xl font-bold text-gray-900 mb-2">Kom langs</h2>
+      <ul class="text-gray-700 space-y-1">
+        <li><strong>Adres:</strong> Stationsstraat 88, Menen</li>
+        <li><strong>Open:</strong> Maandag tot Vrijdag, 09:00 - 12:00</li>
+        <li><strong>Telefoon:</strong> 012 34 56 78</li>
+      </ul>
+    </div>
+  </section>
+
+  <!-- Nieuws sectie (gelimiteerd tot de 3 laatste berichten) -->
+  <section>
+    <h2 class="text-3xl font-bold text-purple-800 mb-6 border-b-4 border-lime-500 pb-2 inline-block">
+      Laatste Nieuws
+    </h2>
+
+    <div class="grid md:grid-cols-2 gap-6 mt-4">
+      {berichten.length === 0 ? (
+        <p class="text-gray-500 italic">Er zijn nog geen nieuwsberichten toegevoegd.</p>
+      ) : (
+        berichten.map((bericht) => (
+          <article class="bg-gray-50 p-6 rounded-lg border border-gray-200 shadow-sm">
+            {bericht.imageUrl && (
+              <img 
+                src={bericht.imageUrl} 
+                alt={bericht.titel} 
+                class="w-full h-48 object-cover rounded-md mb-4"
+              />
+            )}
+            <h3 class="text-xl font-bold text-gray-900 mb-2">{bericht.titel}</h3>
+            {bericht.datum && (
+              <p class="text-sm text-lime-700 font-bold mb-3">
+                {new Date(bericht.datum).toLocaleDateString('nl-BE')}
+              </p>
+            )}
+            <p class="text-gray-700 line-clamp-3">
+              {bericht.inhoud}
+            </p>
+            <a href={`/nieuws/${bericht._id}`} class="inline-block bg-purple-800 text-white px-4 py-2 rounded font-bold hover:bg-purple-900 transition-colors text-center">
+    Lees meer
+  </a>
+          </article>
+        ))
+      )}
+    </div>
+  </section>
+</Layout>

@@ -1,0 +1,58 @@
+---
+import Layout from '../../layouts/Layout.astro';
+import { createClient } from '@sanity/client';
+
+export async function getStaticPaths() {
+  const client = createClient({
+    projectId: import.meta.env.PUBLIC_SANITY_PROJECT_ID,
+    dataset: import.meta.env.PUBLIC_SANITY_DATASET,
+    useCdn: false,
+    apiVersion: '2024-01-01',
+  });
+
+  // We halen hier alle nieuwsberichten op, inclusief hun unieke _id
+  const berichten = await client.fetch(`*[_type == "nieuws"]{
+    _id,
+    titel,
+    datum,
+    inhoud,
+    "imageUrl": afbeelding.asset->url
+  }`);
+
+  // Astro maakt voor elk gevonden ID een aparte pagina aan
+  return berichten.map((bericht) => ({
+    params: { id: bericht._id },
+    props: { bericht },
+  }));
+}
+
+const { bericht } = Astro.props;
+---
+
+<Layout>
+  <article class="bg-white p-8 rounded-xl border border-gray-200 shadow-sm mt-4 max-w-3xl mx-auto">
+    <a href="/" class="text-lime-600 hover:text-lime-700 font-bold mb-6 inline-block">
+      &larr; Terug naar overzicht
+    </a>
+    
+    {bericht.imageUrl && (
+      <img 
+        src={bericht.imageUrl} 
+        alt={bericht.titel} 
+        class="w-full h-80 object-cover rounded-lg mb-6 shadow-sm"
+      />
+    )}
+    
+    <h1 class="text-4xl font-bold text-purple-800 mb-4">{bericht.titel}</h1>
+    
+    {bericht.datum && (
+      <p class="text-gray-500 font-medium mb-8 pb-4 border-b border-gray-200">
+        Gepubliceerd op {new Date(bericht.datum).toLocaleDateString('nl-BE')}
+      </p>
+    )}
+    
+    <div class="text-gray-800 text-lg leading-relaxed whitespace-pre-wrap">
+      {bericht.inhoud}
+    </div>
+  </article>
+</Layout>

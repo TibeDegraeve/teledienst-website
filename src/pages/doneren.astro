@@ -1,0 +1,48 @@
+---
+import Layout from '../layouts/Layout.astro';
+---
+
+<Layout>
+  <article class="bg-white p-8 rounded-xl border border-gray-200 shadow-sm mt-4">
+    <h1 class="text-4xl font-bold text-purple-800 mb-6 border-b-4 border-lime-500 pb-2 inline-block">
+      Steun VZW Teledienst
+    </h1>
+    
+    <div class="grid md:grid-cols-2 gap-10 mt-4">
+      <!-- Financiële donaties -->
+      <div>
+        <h2 class="text-2xl font-bold text-gray-900 mb-4">Financiële steun</h2>
+        <p class="text-gray-700 text-lg mb-6 leading-relaxed">
+          Jouw donatie helpt ons om de vervoersdienst draaiende te houden en mensen lokaal te ondersteunen. Elke bijdrage, groot of klein, maakt een direct verschil.
+        </p>
+        <div class="bg-gray-50 p-6 rounded-lg border border-gray-200">
+          <p class="font-bold text-purple-800 mb-2">Stort je bijdrage op:</p>
+          <p class="text-xl font-mono text-gray-900 tracking-wider mb-1">BE00 1234 5678 9012</p>
+          <p class="text-sm text-gray-500">Op naam van VZW Teledienst</p>
+        </div>
+      </div>
+
+      <!-- Spullen doneren -->
+      <div>
+        <h2 class="text-2xl font-bold text-gray-900 mb-4">Kledij en Huisraad</h2>
+        <p class="text-gray-700 text-lg mb-6 leading-relaxed">
+          Heb je kleding of bruikbare spullen die je niet meer nodig hebt? Wij geven ze graag een tweede leven in onze Televestiaire.
+        </p>
+        <ul class="space-y-2 text-gray-800 mb-4">
+          <li class="flex items-center gap-2">
+            <strong class="text-lime-600">✓</strong> Kwalitatieve tweedehandskledij
+          </li>
+          <li class="flex items-center gap-2">
+            <strong class="text-lime-600">✓</strong> Schoenen in goede staat
+          </li>
+          <li class="flex items-center gap-2">
+            <strong class="text-lime-600">✓</strong> Kleine, bruikbare huisraad
+          </li>
+        </ul>
+        <p class="text-gray-600 text-sm">
+          Breng je spullen gerust binnen tijdens onze <a href="/contact" class="text-lime-600 font-bold hover:underline">openingsuren</a>.
+        </p>
+      </div>
+    </div>
+  </article>
+</Layout>

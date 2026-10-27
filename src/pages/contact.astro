@@ -1,0 +1,62 @@
+---
+import Layout from '../layouts/Layout.astro';
+---
+
+<Layout>
+  <h1 class="text-4xl font-bold text-purple-800 mb-6 border-b-4 border-lime-500 pb-2 inline-block">
+    Contact & Openingsuren
+  </h1>
+
+  <div class="grid md:grid-cols-2 gap-10 mt-4">
+    <!-- Linker kolom: Contactgegevens -->
+    <div>
+      <p class="text-gray-700 text-lg mb-6 leading-relaxed">
+        Heb je een vraag over onze werking, wil je kledij doneren of heb je hulp nodig? Neem gerust contact met ons op of kom langs tijdens de openingsuren.
+      </p>
+      
+      <ul class="space-y-4 text-gray-800">
+        <li class="flex items-center">
+          <strong class="w-24 text-purple-800">Adres:</strong> 
+          Stationsstraat 88, 8930 Menen
+        </li>
+        <li class="flex items-center">
+          <strong class="w-24 text-purple-800">Telefoon:</strong> 
+          012 34 56 78
+        </li>
+        <li class="flex items-center">
+          <strong class="w-24 text-purple-800">E-mail:</strong> 
+          <a href="mailto:info@teledienst.be" class="text-lime-600 hover:underline">info@teledienst.be</a>
+        </li>
+      </ul>
+    </div>
+
+    <!-- Rechter kolom: Openingsuren blok -->
+    <div class="bg-gray-50 p-8 rounded-xl border border-gray-200 shadow-sm">
+      <h2 class="text-2xl font-bold text-gray-900 mb-4">Wanneer zijn we open?</h2>
+      
+      <ul class="space-y-2 text-gray-700">
+        <li class="flex justify-between border-b border-gray-200 pb-2">
+          <span class="font-medium">Maandag</span> <span>09:00 - 12:00</span>
+        </li>
+        <li class="flex justify-between border-b border-gray-200 pb-2">
+          <span class="font-medium">Dinsdag</span> <span>09:00 - 12:00</span>
+        </li>
+        <li class="flex justify-between border-b border-gray-200 pb-2">
+          <span class="font-medium">Woensdag</span> <span>09:00 - 12:00</span>
+        </li>
+        <li class="flex justify-between border-b border-gray-200 pb-2">
+          <span class="font-medium">Donderdag</span> <span>09:00 - 12:00</span>
+        </li>
+        <li class="flex justify-between pt-1">
+          <span class="font-medium">Vrijdag</span> <span>09:00 - 12:00</span>
+        </li>
+        <li class="flex justify-between border-b border-gray-200 pb-2">
+          <span class="font-medium">Zaterdag</span> <span class="text-red-600 font-medium">Gesloten</span>
+        </li>
+        <li class="flex justify-between border-b border-gray-200 pb-2">
+          <span class="font-medium">Zondag</span> <span class="text-red-600 font-medium">Gesloten</span>
+        </li>
+      </ul>
+    </div>
+  </div>
+</Layout>
