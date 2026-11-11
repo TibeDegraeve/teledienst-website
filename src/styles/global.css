@@ -1,1 +1,13 @@
 @import "tailwindcss";
+@import "@fontsource-variable/bricolage-grotesque";
+@import "@fontsource-variable/figtree";
+
+@theme {
+    --font-display: "Bricolage Grotesque Variable", ui-sans-serif, system-ui, sans-serif;
+    --font-sans: "Figtree Variable", ui-sans-serif, system-ui, sans-serif;
+    --color-brand-purple: #521f85;
+    --color-brand-lime: #92c83e;
+    --color-brand-lime-dark: #7fb32e;
+    --color-brand-ink: #1d1230;
+    --color-brand-tint: #f4f1f9;
+}

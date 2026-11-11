@@ -1,40 +1,73 @@
 ---
 import '../styles/global.css';
 // src/layouts/Layout.astro
+
+const {
+  title = 'VZW Teledienst',
+  description = 'VZW Teledienst in Menen: ondersteuning, een luisterend oor en praktische hulp, zoals onze televestiaire.',
+} = Astro.props;
 ---
 <html lang="nl">
   <head>
     <meta charset="utf-8" />
     <meta name="viewport" content="width=device-width, initial-scale=1.0" />
-    <title>VZW Teledienst</title>
+    <meta name="description" content={description} />
+    <link rel="icon" type="image/svg+xml" href="/favicon.svg" />
+    <link rel="icon" href="/favicon.ico" sizes="any" />
+    <title>{title}</title>
   </head>
-  <body class="bg-gray-50 text-gray-900 font-sans flex flex-col min-h-screen">
-    
-    <!-- Navigatiebalk in de juiste huisstijl -->
-    <header class="bg-white p-6 shadow-sm border-b-4 border-lime-500">
-      <div class="max-w-4xl mx-auto flex justify-between items-center">
-        <!-- Het logo met gesplitste kleuren zoals op de gevel -->
-        <a href="/" class="text-3xl font-bold tracking-tight">
-          <span class="text-lime-500">tele</span><span class="text-purple-800">dienst</span>
+  <body class="flex min-h-screen flex-col bg-white font-sans text-brand-ink">
+
+    <header class="border-b border-brand-ink/10 bg-white">
+      <div class="mx-auto flex max-w-5xl flex-wrap items-center justify-between gap-x-8 gap-y-3 px-6 py-5">
+        <a href="/" class="font-display text-3xl font-bold tracking-tight focus-visible:outline-2 focus-visible:outline-offset-4 focus-visible:outline-brand-purple">
+          <span class="text-brand-lime">tele</span><span class="text-brand-purple">dienst</span>
         </a>
-        <nav class="space-x-4 font-medium text-gray-600">
-          <a href="/" class="hover:text-purple-800 transition-colors">Home</a>
-          <a href="/nieuws" class="text-gray-700 hover:text-purple-800 font-medium">Nieuws</a>
-          <a href="/onze-werking" class="hover:text-purple-800 transition-colors">Onze werking</a>
-          <a href="/doneren" class="bg-lime-500 text-white px-4 py-2 rounded font-bold hover:bg-lime-600 transition-colors">Steun ons</a>
-          <a href="/contact" class="hover:text-purple-800 transition-colors">Contact</a>
+        <nav class="flex flex-wrap items-center gap-x-6 gap-y-2 font-medium text-brand-ink/80">
+          <a href="/" class="hover:text-brand-purple">Home</a>
+          <a href="/nieuws" class="hover:text-brand-purple">Nieuws</a>
+          <a href="/onze-werking" class="hover:text-brand-purple">Onze werking</a>
+          <a href="/contact" class="hover:text-brand-purple">Contact</a>
+          <a
+            href="/doneren"
+            class="rounded-md bg-brand-lime px-4 py-2 font-semibold text-brand-ink transition-colors hover:bg-brand-lime-dark focus-visible:outline-2 focus-visible:outline-offset-2 focus-visible:outline-brand-purple"
+          >
+            Steun ons
+          </a>
         </nav>
       </div>
     </header>
 
     <!-- Hier wordt de unieke inhoud van elke pagina ingeladen -->
-    <main class="max-w-4xl mx-auto p-6 mt-8 bg-white shadow-sm rounded-lg flex-grow w-full">
-      <slot /> 
+    <main class="mx-auto w-full max-w-5xl flex-grow px-6 py-12">
+      <slot />
     </main>
 
-    <!-- Footer -->
-    <footer class="bg-purple-900 text-white text-center p-4 mt-8">
-      <p>&copy; {new Date().getFullYear()} VZW Teledienst. Alle rechten voorbehouden.</p>
+    <footer class="border-t border-brand-ink/10 bg-brand-tint">
+      <div class="mx-auto grid max-w-5xl gap-8 px-6 py-12 md:grid-cols-12">
+        <div class="md:col-span-5">
+          <p class="font-display text-2xl font-bold">
+            <span class="text-brand-lime">tele</span><span class="text-brand-purple">dienst</span>
+          </p>
+          <p class="mt-2 max-w-xs text-brand-ink/75">Een hart voor mensen in Menen.</p>
+        </div>
+        <div class="md:col-span-4">
+          <p class="font-semibold text-brand-purple">Kom langs</p>
+          <p class="mt-2 text-brand-ink/80">Stationsstraat 88, Menen</p>
+          <p class="text-brand-ink/80">Maandag tot vrijdag, 09:00 &ndash; 12:00</p>
+        </div>
+        <div class="md:col-span-3">
+          <p class="font-semibold text-brand-purple">Contact</p>
+          <p class="mt-2">
+            <a href="tel:012345678" class="text-brand-ink/80 underline decoration-brand-lime decoration-2 underline-offset-4 hover:decoration-brand-purple">012 34 56 78</a>
+          </p>
+        </div>
+      </div>
+      <div class="border-t border-brand-ink/10">
+        <p class="mx-auto max-w-5xl px-6 py-5 text-sm text-brand-ink/60">
+          &copy; {new Date().getFullYear()} VZW Teledienst. Alle rechten voorbehouden.
+        </p>
+      </div>
     </footer>
 
   </body>
